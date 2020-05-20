@@ -1,0 +1,36 @@
+{
+    "meta" : {
+        "label": "UiPath Robot logs",
+        "description": "Import logs from you UiPath robots",
+        "icon": "icon-bug"
+    },
+    "readable": true,
+    "writable": false,
+    "params": [
+        {
+            "name": "access_type",
+            "label": "Access type. Reviewer: hidden menu to keep for future extension",
+            "visibilityCondition": "false",
+            "type": "SELECT",
+            "defaultValue": "oauth-token",
+            "selectChoices": [
+                {
+                    "value": "oauth-token",
+                    "label": "Token"
+                }
+            ]
+        },
+        {
+            "name": "oauth-token",
+            "label": "Token API access",
+            "type": "PRESET",
+            "parameterSetId": "oauth-token",
+            "visibilityCondition": "model.access_type == 'oauth-token'"
+        },
+        {
+            "name": "filter",
+            "label": "Filter",
+            "type": "STRING"
+        }
+    ]
+}

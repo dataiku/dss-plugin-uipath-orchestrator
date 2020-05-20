@@ -1,0 +1,13 @@
+{
+    "id": "uipath-orchestrator",
+    "version": "0.0.1",
+    "meta": {
+        "label": "Uipath Orchestrator",
+        "description": "",
+        "author": "Dataiku (Alex Bourret)",
+        "icon": "icon-bug",
+        "tags": ["Cloud"],
+        "url": "https://www.dataiku.com/product/plugins/uipath-orchestrator/",
+        "licenseInfo": "Apache Software License"
+    }
+}
