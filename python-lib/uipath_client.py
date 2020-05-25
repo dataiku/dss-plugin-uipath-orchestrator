@@ -109,7 +109,7 @@ class UIPathClient(object):
             params = {
                 "$filter": filter
             }
-        if records_limit > 0 and records_limit < 1000:  # Cannot request a large amount with $top
+        if records_limit > 0 and records_limit < 1000:  # Cannot request $top > 1000
             params.update({
                 "$top": records_limit
             })
@@ -117,6 +117,7 @@ class UIPathClient(object):
             params.update({
                 "$skip": skip
             })
+        params.update({"$orderby": "TimeStamp desc"})
         headers = self.get_headers()
         url = URL.format(
             account_logical_name=self.account_logical_name,
