@@ -109,7 +109,7 @@ class UIPathClient(object):
             params = {
                 "$filter": filter
             }
-        if records_limit > 0:
+        if records_limit > 0 and records_limit < 1000:  # Cannot request a large amount with $top
             params.update({
                 "$top": records_limit
             })
