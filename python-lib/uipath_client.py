@@ -12,8 +12,9 @@ GET_ROBOT_LOGS = "{url}/odata/RobotLogs"
 
 class UIPathClient(object):
 
-    def __init__(self, config):
+    def __init__(self, config, folder_name=""):
         self.config = config
+        self.folder_name = folder_name
         self.tenant_logical_name = self.config.get("tenant_logical_name")
         self.account_logical_name = self.config.get("account_logical_name")
         self.process_name = self.config.get("process_name")
@@ -43,7 +44,7 @@ class UIPathClient(object):
         json_response = response.json()
         return json_response
 
-    def get_headers(self, no_auth=False):
+    def get_headers(self, no_auth=False, folder_name=""):
         headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
@@ -51,6 +52,8 @@ class UIPathClient(object):
         }
         if not no_auth:
             headers["Authorization"] = "Bearer {access_token}".format(access_token=self.access_token)
+        if self.folder_name != "":
+            headers.update({"X-UIPATH-FolderPath": self.folder_name})
         return headers
 
     def get_process_key_by_name(self, process_name):

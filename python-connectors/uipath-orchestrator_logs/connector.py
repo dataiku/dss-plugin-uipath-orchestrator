@@ -11,7 +11,8 @@ class MyConnector(Connector):
         self.connection_details = config.get(self.access_type)
         self.account_logical_name = config.get("account_logical_name")
         self.filter = config.get("filter", None)
-        self.client = UIPathClient(self.connection_details)
+        folder_name = config.get("folder_name", None)
+        self.client = UIPathClient(self.connection_details, folder_name)
 
     def get_read_schema(self):
 

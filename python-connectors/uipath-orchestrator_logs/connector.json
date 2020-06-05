@@ -28,6 +28,12 @@
             "visibilityCondition": "model.access_type == 'oauth-token'"
         },
         {
+            "name": "folder_name",
+            "label": "Folder name",
+            "defaultValue": "",
+            "type": "STRING"
+        },
+        {
             "name": "filter",
             "label": "Filter",
             "type": "STRING"
