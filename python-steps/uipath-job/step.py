@@ -25,7 +25,6 @@ client = UIPathClient(oauth_token, folder_name=folder_name)
 
 process_id = client.get_process_key_by_name(process_name)
 robot_id = client.get_robot_by_name(robot_name)
-print("ALX:robot_id={}".format(robot_id))
 
 job = client.start_job(process_id)
 finished = False
