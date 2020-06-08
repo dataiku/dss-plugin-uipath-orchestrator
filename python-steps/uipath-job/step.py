@@ -34,3 +34,5 @@ while not finished:
     finished = (job_status["EndTime"] is not None)
     if job_status['State'] == 'Stopped':
         raise Exception("Job was stoped from UiPath Orchestrator")
+    if job_status['State'] == 'Faulted':
+        raise Exception("Job was stoped with an error during execution")
