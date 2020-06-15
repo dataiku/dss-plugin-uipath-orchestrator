@@ -152,5 +152,5 @@ class UIPathClient(object):
         json_response = self.post(url, headers=headers, json=json_data)
         return json_response["value"][0]
 
-    def is_finnished(self):
+    def is_finished(self):
         return self.remaining_records == 0

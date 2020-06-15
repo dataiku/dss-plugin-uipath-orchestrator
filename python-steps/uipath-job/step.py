@@ -33,6 +33,6 @@ while not finished:
     job_status = client.get_jobs_by_key(job.get("Key"))
     finished = (job_status["EndTime"] is not None)
     if job_status['State'] == 'Stopped':
-        raise Exception("Job was stoped from UiPath Orchestrator")
+        raise Exception("Job was stopped from UiPath Orchestrator")
     if job_status['State'] == 'Faulted':
-        raise Exception("Job was stoped with an error during execution")
+        raise Exception("Job was stopped with an error during execution")

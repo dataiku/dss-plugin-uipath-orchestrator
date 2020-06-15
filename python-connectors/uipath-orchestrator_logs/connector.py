@@ -28,7 +28,7 @@ class MyConnector(Connector):
             for row in logs:
                 row.pop("RawMessage", None)
                 yield row
-            if not self.client.is_finnished():
+            if not self.client.is_finished():
                 logs = self.client.get_robot_logs(filter=self.filter, records_limit=records_limit, skip=self.client.records_to_skip)
             else:
                 break
