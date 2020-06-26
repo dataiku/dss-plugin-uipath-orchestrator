@@ -1,0 +1,34 @@
+{
+    "meta" : {
+        "label": "UIPath basic login",
+        "description": "",
+        "icon": "icon-bug"
+    },
+    "defaultDefinableInline": true,
+    "defaultDefinableAtProjectLevel": true,
+    "pluginParams": [
+    ],
+
+    "params": [
+        {
+            "name": "tenant",
+            "label": "User-readable name",
+            "type": "STRING",
+            "description": "Usually your company name",
+            "mandatory": true
+        },
+        {
+            "name": "username",
+            "label": "User-readable name",
+            "type": "STRING",
+            "description": "Username or email address",
+            "mandatory": true
+        },
+        {
+            "name": "password",
+            "label": "User-readable name",
+            "type": "PASSWORD",
+            "mandatory": true
+        }
+    ]
+}

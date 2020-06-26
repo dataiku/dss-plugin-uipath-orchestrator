@@ -1,0 +1,42 @@
+{
+    "meta" : {
+        "label": "UIPath oauth token",
+        "description": "",
+        "icon": "icon-bug"
+    },
+    "defaultDefinableInline": true,
+    "defaultDefinableAtProjectLevel": true,
+    "pluginParams": [
+    ],
+
+    "params": [
+        {
+            "name": "account_logical_name",
+            "label": "Account logical name",
+            "type": "STRING",
+            "description": "Usually your company name",
+            "mandatory": true
+        },
+        {
+            "name": "tenant_logical_name",
+            "label": "Tenant Logical Name",
+            "type": "STRING",
+            "description": "Given with the token",
+            "mandatory": true
+        },
+        {
+            "name": "client_id",
+            "label": "Client Id",
+            "type": "STRING",
+            "description": "Given with the token",
+            "mandatory": true
+        },
+        {
+            "name": "refresh_token",
+            "label": "User Key",
+            "type": "PASSWORD",
+            "description": "Given with the token",
+            "mandatory": true
+        }
+    ]
+}

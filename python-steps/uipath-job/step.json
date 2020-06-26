@@ -1,0 +1,45 @@
+{
+    "meta" : {
+        "label": "UiPath Job",
+        "description": "",
+        "icon": "icon-bug"
+    },
+    "params": [
+        {
+            "name": "access_type",
+            "label": "Access type. Reviewer: hidden menu to keep for future extension",
+            "visibilityCondition": "false",
+            "type": "SELECT",
+            "defaultValue": "oauth-token",
+            "selectChoices": [
+                {
+                    "value": "oauth-token",
+                    "label": "Token"
+                }
+            ]
+        },
+        {
+            "name": "oauth-token",
+            "label": "Token API access",
+            "type": "PRESET",
+            "parameterSetId": "oauth-token",
+            "visibilityCondition": "model.access_type == 'oauth-token'"
+        },
+        {
+            "name": "folder_name",
+            "label": "Folder name",
+            "defaultValue": "",
+            "type": "STRING"
+        },
+        {
+            "name": "process_name",
+            "label": "Process name",
+            "type": "STRING"
+        },
+        {
+            "name": "robot_name",
+            "label": "Robot name",
+            "type": "STRING"
+        }
+    ]
+}
