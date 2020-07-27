@@ -1,7 +1,7 @@
 {
     "meta" : {
-        "label": "UiPath Job",
-        "description": "",
+        "label": "UIPath Job",
+        "description": "A scenario step to start a UIPath robot.",
         "icon": "icon-bug"
     },
     "params": [

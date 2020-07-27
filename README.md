@@ -1,6 +1,6 @@
-# UiPath Orchestrator Plugin
+# UIPath Orchestrator Plugin
 
-This Dataiku DSS plugin lets you import robot logs from your [UiPath Orchestrator](https://www.uipath.com/) account.
+This Dataiku DSS plugin lets you import robot logs from your [UIPath Orchestrator](https://www.uipath.com/) account.
 
 Documentation: https://www.dataiku.com/product/plugins/uipath-orchestrator/
 
