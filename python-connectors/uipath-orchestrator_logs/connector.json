@@ -1,7 +1,7 @@
 {
     "meta" : {
-        "label": "UIPath Robot logs",
-        "description": "Import robot run logs from UIPath Orchestrator",
+        "label": "UiPath Robot logs",
+        "description": "Import robot run logs from UiPath Orchestrator",
         "icon": "icon-bug"
     },
     "readable": true,
