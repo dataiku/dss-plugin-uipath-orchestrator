@@ -6,7 +6,7 @@
         "description": "Start robots from a scenario and read robot logs from UIPath Orchestrator.",
         "author": "Dataiku (Alex BOURRET)",
         "icon": "icon-bug",
-        "tags": ["Cloud"],
+        "tags": ["Productivity","API","Logs","Cloud"],
         "url": "https://www.dataiku.com/product/plugins/uipath-orchestrator/",
         "licenseInfo": "Apache Software License"
     }
