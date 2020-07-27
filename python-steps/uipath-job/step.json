@@ -7,7 +7,7 @@
     "params": [
         {
             "name": "access_type",
-            "label": "Access type. Reviewer: hidden menu to keep for future extension",
+            "label": "Access type.",
             "visibilityCondition": "false",
             "type": "SELECT",
             "defaultValue": "oauth-token",

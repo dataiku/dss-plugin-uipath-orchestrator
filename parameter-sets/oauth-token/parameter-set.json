@@ -21,21 +21,21 @@
             "name": "tenant_logical_name",
             "label": "Tenant Logical Name",
             "type": "STRING",
-            "description": "Given with the token",
+            "description": "Obtained with the token",
             "mandatory": true
         },
         {
             "name": "client_id",
             "label": "Client Id",
             "type": "STRING",
-            "description": "Given with the token",
+            "description": "Obtained with the token",
             "mandatory": true
         },
         {
             "name": "refresh_token",
             "label": "User Key",
             "type": "PASSWORD",
-            "description": "Given with the token",
+            "description": "Obtained with the token",
             "mandatory": true
         }
     ]

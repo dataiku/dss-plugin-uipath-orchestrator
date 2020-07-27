@@ -12,7 +12,7 @@
     "params": [
         {
             "name": "tenant",
-            "label": "User-readable name",
+            "label": "Tenant name name",
             "type": "STRING",
             "description": "Usually your company name",
             "mandatory": true
@@ -26,7 +26,7 @@
         },
         {
             "name": "password",
-            "label": "User-readable name",
+            "label": "Password",
             "type": "PASSWORD",
             "mandatory": true
         }
