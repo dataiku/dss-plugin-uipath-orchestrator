@@ -2,9 +2,9 @@
     "id": "uipath-orchestrator",
     "version": "1.0.0",
     "meta": {
-        "label": "Uipath Orchestrator",
-        "description": "",
-        "author": "Dataiku (Alex Bourret)",
+        "label": "UIPath Orchestrator",
+        "description": "Start robots from a scenario and read robot logs from UIPath Orchestrator.",
+        "author": "Dataiku (Alex BOURRET)",
         "icon": "icon-bug",
         "tags": ["Cloud"],
         "url": "https://www.dataiku.com/product/plugins/uipath-orchestrator/",
