@@ -20,11 +20,12 @@ step_config = get_step_config()
 folder_name = step_config.get("folder_name")
 robot_name = step_config.get("robot_name")
 process_name = step_config.get("process_name")
+folder_type = step_config.get("folder_type", "classical")
 
 client = UIPathClient(oauth_token, folder_name=folder_name)
 
 process_id = client.get_process_key_by_name(process_name)
-robot_id = client.get_robot_by_name(robot_name)
+robot_id = client.get_robot_by_name(robot_name, folder_type=folder_type)
 
 job = client.start_job(process_id)
 finished = False
