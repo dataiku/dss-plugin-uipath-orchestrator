@@ -4,7 +4,9 @@ JOB_URL = "https://platform.uipath.com/{account_logical_name}/{tenant_logical_na
 REFRESH_TOKEN_URL = "https://account.uipath.com/oauth/token"
 URL = "https://platform.uipath.com/{account_logical_name}/{tenant_logical_name}"
 GET_PROCESSKEY_BY_NAME = "{url}/odata/Releases?$filter=ProcessKey eq '{process_name}'"
-GET_ROBOT_BY_NAME = "{url}/odata/Robots?$filter=Name eq '{robot_name}'"
+GET_ROBOT_BY_NAME_FROM_CLASSICAL_FOLDER = "{url}/odata/Robots?$filter=Name eq '{robot_name}'"
+GET_ROBOT_BY_NAME_FROM_MODERN_FOLDER = "{url}/odata/Sessions/UiPath.Server.Configuration.OData.GetGlobalSessions?$filter=Robot/Name eq '{robot_name}'"
+GET_ROBOT_FROM_MODERN_FOLDER = "{url}/odata/Sessions/UiPath.Server.Configuration.OData.GetGlobalSessions"
 START_JOB = "{url}/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs"
 GET_JOBS = "{url}/odata/Jobs"
 GET_ROBOT_LOGS = "{url}/odata/RobotLogs"
@@ -78,9 +80,14 @@ class UIPathClient(object):
         json_response = response.json()
         return json_response
 
-    def get_robot_by_name(self, robot_name):
+    def get_robot_by_name(self, robot_name, folder_type="classical"):
         url = URL.format(account_logical_name=self.account_logical_name, tenant_logical_name=self.tenant_logical_name)
-        url = GET_ROBOT_BY_NAME.format(url=url, robot_name=robot_name)
+        if folder_type == "classical":
+            url = GET_ROBOT_BY_NAME_FROM_CLASSICAL_FOLDER.format(url=url, robot_name=robot_name)
+        elif robot_name:
+            url = GET_ROBOT_BY_NAME_FROM_MODERN_FOLDER.format(url=url, robot_name=robot_name)
+        else:
+            url = GET_ROBOT_FROM_MODERN_FOLDER.format(url=url)
         headers = self.get_headers()
         json_response = self.get(url, headers=headers)
         return json_response["value"][0]["Id"]
