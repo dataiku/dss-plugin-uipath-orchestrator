@@ -55,6 +55,7 @@
         {
             "name": "robot_name",
             "label": "Robot name",
+            "description": "Optional",
             "type": "STRING"
         }
     ]

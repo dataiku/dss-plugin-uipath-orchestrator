@@ -1,4 +1,5 @@
 import requests
+import logging
 
 JOB_URL = "https://platform.uipath.com/{account_logical_name}/{tenant_logical_name}/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs"
 REFRESH_TOKEN_URL = "https://account.uipath.com/oauth/token"
@@ -12,6 +13,15 @@ GET_JOBS = "{url}/odata/Jobs"
 GET_ROBOT_LOGS = "{url}/odata/RobotLogs"
 
 
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO,
+                    format='uipath-orchestrator plugin %(levelname)s - %(message)s')
+
+
+class UIPathClientError(ValueError):
+    pass
+
+
 class UIPathClient(object):
 
     def __init__(self, config, folder_name=""):
@@ -23,6 +33,10 @@ class UIPathClient(object):
         self.client_id = self.config.get("client_id")
         refresh_token = self.config.get("refresh_token")
         self.access_token = self.get_access_token(refresh_token)
+        if self.access_token:
+            logger.info("Access token retrieved")
+        else:
+            logger.error("Empty access token")
         self.remaining_records = 0
         self.records_to_skip = 0
 
@@ -43,6 +57,10 @@ class UIPathClient(object):
         if json is not None:
             args["json"] = json
         response = requests.post(url, **args)
+        if response.status_code >= 400:
+            logger.error("HTTP error {} on post to '{}'".format(response.status_code, url))
+            logger.error("reponse: {}".format(response.content))
+            raise UIPathClientError("Error {}: {}".format(response.status_code, response.text))
         json_response = response.json()
         return json_response
 
@@ -63,7 +81,11 @@ class UIPathClient(object):
         url = GET_PROCESSKEY_BY_NAME.format(url=url, process_name=process_name)
         headers = self.get_headers()
         json_response = self.get(url, headers=headers)
-        return json_response["value"][0]["Key"]
+        processes = json_response.get("value")
+        if processes:
+            return processes[0].get("Key")
+        else:
+            return None
 
     def get(self, url, headers=None, json=None, params=None):
         args = {}
@@ -76,7 +98,7 @@ class UIPathClient(object):
             args["params"] = params
         response = requests.get(**args)
         if response.status_code >= 400:
-            raise Exception("Error {}: {}".format(response.status_code, response.text))
+            raise UIPathClientError("Error {}: {}".format(response.status_code, response.text))
         json_response = response.json()
         return json_response
 
@@ -90,7 +112,8 @@ class UIPathClient(object):
             url = GET_ROBOT_FROM_MODERN_FOLDER.format(url=url)
         headers = self.get_headers()
         json_response = self.get(url, headers=headers)
-        return json_response["value"][0]["Id"]
+        available_robots = json_response.get("value")
+        return extract_key_from_list(available_robots, "Id")
 
     def get_jobs(self, filter=None):
         url = URL.format(account_logical_name=self.account_logical_name, tenant_logical_name=self.tenant_logical_name)
@@ -103,7 +126,7 @@ class UIPathClient(object):
                 "$filter": filter
             }
         json_response = self.get(url, headers=headers, params=params)
-        return json_response["value"]
+        return json_response.get("value", [])
 
     def get_jobs_by_key(self, job_key):
         jobs = self.get_jobs()
@@ -136,20 +159,20 @@ class UIPathClient(object):
         url = GET_ROBOT_LOGS.format(url=url)
         json_response = self.get(url, headers=headers, params=params)
         self.update_remaining_records(json_response)
-        return json_response["value"]
+        return json_response.get("value", [])
 
     def update_remaining_records(self, json_response):
         self.records_to_skip = self.records_to_skip + len(json_response["value"])
         self.remaining_records = json_response["@odata.count"] - self.records_to_skip
 
-    def start_job(self, process_id):
+    def start_job(self, process_id, robot_ids=[]):
         json_data = {
             "startInfo": {
                 "ReleaseKey": process_id,
-                "RobotIds": [],
-                "JobsCount": 1,
+                "RobotIds": robot_ids,
+                "JobsCount": 0 if robot_ids else 1,
                 "JobPriority": "Normal",
-                "Strategy": "JobsCount",
+                "Strategy": "Specific" if robot_ids else "JobsCount",
                 "InputArguments": "{}"
             }
         }
@@ -157,7 +180,18 @@ class UIPathClient(object):
         base_url = URL.format(account_logical_name=self.account_logical_name, tenant_logical_name=self.tenant_logical_name)
         url = START_JOB.format(url=base_url)
         json_response = self.post(url, headers=headers, json=json_data)
-        return json_response["value"][0]
+        return json_response.get("value")[0]
 
     def is_finished(self):
         return self.remaining_records == 0
+
+
+def extract_key_from_list(items, key_to_extract):
+    values = []
+    if items is None:
+        return values
+    for item in items:
+        value = item.get(key_to_extract)
+        if value:
+            values.append(value)
+    return values
