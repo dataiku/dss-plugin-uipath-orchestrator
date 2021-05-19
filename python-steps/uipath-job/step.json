@@ -49,7 +49,7 @@
         },
         {
             "name": "process_name",
-            "label": "Process name",
+            "label": "Package name",
             "type": "STRING"
         },
         {
