@@ -43,7 +43,7 @@ client = UIPathClient(oauth_token, folder_name=folder_name)
 process_id = client.get_process_key_by_name(process_name)
 if process_id is None:
     raise ValueError("Process '{}' does not exist".format(process_name))
-if robot_name:
+if folder_type == "classical" and robot_name:
     robot_ids = client.get_robot_by_name(robot_name, folder_type=folder_type)
     logger.info("Robot name '{}' returned id(s) {}".format(robot_name, robot_ids))
 else:
