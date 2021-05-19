@@ -49,13 +49,15 @@
         },
         {
             "name": "process_name",
-            "label": "Process name",
+            "label": "Package name",
             "type": "STRING"
         },
         {
             "name": "robot_name",
             "label": "Robot name",
-            "type": "STRING"
+            "description": "Optional",
+            "type": "STRING",
+            "visibilityCondition": "model.folder_type == 'classical'"
         }
     ]
 }
