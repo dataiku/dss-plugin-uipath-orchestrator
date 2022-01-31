@@ -1,6 +1,6 @@
 {
     "id": "uipath-orchestrator",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "meta": {
         "label": "UiPath Orchestrator",
         "description": "Start robots from a scenario and read robot logs from UiPath Orchestrator.",

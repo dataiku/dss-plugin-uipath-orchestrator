@@ -26,6 +26,22 @@
             "visibilityCondition": "model.access_type == 'oauth-token'"
         },
         {
+            "name": "folder_type",
+            "label": "Folder type",
+            "type": "SELECT",
+            "defaultValue": "classical",
+            "selectChoices": [
+                {
+                    "value": "classical",
+                    "label": "Classical"
+                },
+                {
+                    "value": "modern",
+                    "label": "Modern"
+                }
+            ]
+        },
+        {
             "name": "folder_name",
             "label": "Folder name",
             "defaultValue": "",
@@ -33,13 +49,15 @@
         },
         {
             "name": "process_name",
-            "label": "Process name",
+            "label": "Package name",
             "type": "STRING"
         },
         {
             "name": "robot_name",
             "label": "Robot name",
-            "type": "STRING"
+            "description": "Optional",
+            "type": "STRING",
+            "visibilityCondition": "model.folder_type == 'classical'"
         }
     ]
 }
