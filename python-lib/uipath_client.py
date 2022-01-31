@@ -59,7 +59,7 @@ class UIPathClient(object):
         response = requests.post(url, **args)
         if response.status_code >= 400:
             logger.error("HTTP error {} on post to '{}'".format(response.status_code, url))
-            logger.error("reponse: {}".format(response.content))
+            logger.error("reponse: {}".format(response.text))
             raise UIPathClientError("Error {}: {}".format(response.status_code, response.text))
         json_response = response.json()
         return json_response
